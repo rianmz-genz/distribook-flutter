@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _databaseController.text = prefs.getString('db') ?? 'hrm';
       _urlController.text =
-          prefs.getString('base_url') ?? 'https://demo-spreadhrm.rediscorp.com';
+          prefs.getString('base_url') ?? 'http://145.223.21.247:6310';
     });
   }
 
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await httpClient.setBaseUrl(_urlController.text);
 
       LoginRequest loginRequest = LoginRequest(
-          username: username, password: password, database: database);
+          email: username, password: password);
 
       bool isSuccess = await processLogin(context, loginRequest);
       if (!mounted) return;
@@ -133,38 +133,38 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                if (showAdvanced) ...[
-                  CustomTextField(
-                    labelText: 'Database',
-                    controller: _databaseController,
-                    obscureText: false,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Database is required';
-                      }
-                      return null;
-                    },
-                  ),
-                  CustomTextField(
-                    labelText: 'URL',
-                    controller: _urlController,
-                    obscureText: false,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'URL is required';
-                      }
-                      return null;
-                    },
-                  ),
-                ],
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      showAdvanced = !showAdvanced;
-                    });
-                  },
-                  child: Text(showAdvanced ? 'Hide Advanced' : 'Show Advanced'),
-                ),
+                // if (showAdvanced) ...[
+                //   CustomTextField(
+                //     labelText: 'Database',
+                //     controller: _databaseController,
+                //     obscureText: false,
+                //     validator: (value) {
+                //       if (value == null || value.isEmpty) {
+                //         return 'Database is required';
+                //       }
+                //       return null;
+                //     },
+                //   ),
+                //   CustomTextField(
+                //     labelText: 'URL',
+                //     controller: _urlController,
+                //     obscureText: false,
+                //     validator: (value) {
+                //       if (value == null || value.isEmpty) {
+                //         return 'URL is required';
+                //       }
+                //       return null;
+                //     },
+                //   ),
+                // ],
+                // TextButton(
+                //   onPressed: () {
+                //     setState(() {
+                //       showAdvanced = !showAdvanced;
+                //     });
+                //   },
+                //   child: Text(showAdvanced ? 'Hide Advanced' : 'Show Advanced'),
+                // ),
                 SizedBox(height: 12),
                 CustomButton(
                   text: isLoadingLogin ? '...' : 'Login',

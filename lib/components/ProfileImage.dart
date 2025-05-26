@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ProfileImage extends StatelessWidget {
   final String? base64Image;
 
-  const ProfileImage({super.key, this.base64Image});
+  const ProfileImage(String s, {super.key, this.base64Image});
 
   @override
   Widget build(BuildContext context) {

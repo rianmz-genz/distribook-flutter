@@ -1,55 +1,31 @@
 class SelfResponse {
-  final SelfData data;
-  final String message;
+  final int id;
+  final String name;
+  final String email;
+  final String? emailVerifiedAt;
+  final String role;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   SelfResponse({
-    required this.data,
-    required this.message,
+    required this.id,
+    required this.name,
+    required this.email,
+    this.emailVerifiedAt,
+    required this.role,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory SelfResponse.fromJson(Map<String, dynamic> json) {
     return SelfResponse(
-      data: SelfData.fromJson(json['data']),
-      message: json['message'],
-    );
-  }
-}
-
-class SelfData {
-  final String company;
-  final String name;
-  final Employee? employee;
-
-  SelfData({
-    required this.company,
-    required this.name,
-    this.employee,
-  });
-
-  factory SelfData.fromJson(Map<String, dynamic> json) {
-    return SelfData(
-      company: json['company'],
+      id: json['id'],
       name: json['name'],
-      employee: json['employee'] != null
-          ? Employee.fromJson(json['employee'])
-          : null,
-    );
-  }
-}
-
-class Employee {
-  final String name;
-  final String? image;
-
-  Employee({
-    required this.name,
-    this.image,
-  });
-
-  factory Employee.fromJson(Map<String, dynamic> json) {
-    return Employee(
-      name: json['name'],
-      image: json['image'],
+      email: json['email'],
+      emailVerifiedAt: json['email_verified_at'],
+      role: json['role'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
     );
   }
 }

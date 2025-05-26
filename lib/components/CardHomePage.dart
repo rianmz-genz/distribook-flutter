@@ -30,7 +30,7 @@ class _CardHomePageState extends State<CardHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final data = selfResponse?.data;
+    final data = selfResponse;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -71,7 +71,7 @@ class _CardHomePageState extends State<CardHomePage> {
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(data.company,
+                        Text(data.email,
                             style: const TextStyle(color: Colors.white)),
                         const SizedBox(height: 4),
                         Text(data.name,
@@ -84,7 +84,7 @@ class _CardHomePageState extends State<CardHomePage> {
             ),
             Column(children: [
               ProfileImage(
-                base64Image: selfResponse?.data.employee?.image ?? "",
+                "",
               )
             ])
           ],

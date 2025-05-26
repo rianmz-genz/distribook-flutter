@@ -33,7 +33,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = selfResponse?.data;
+    final user = selfResponse;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -50,18 +50,18 @@ class _SettingScreenState extends State<SettingScreen> {
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(
               children: [
-                user == null
-                    ? Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: const CircleAvatar(
-                          radius: 40,
-                          backgroundColor: Colors.white,
-                        ),
-                      )
-                    : ProfileImage(
-                        base64Image: user.employee?.image ?? '',
-                      ),
+                // user == null
+                //     ? Shimmer.fromColors(
+                //         baseColor: Colors.grey[300]!,
+                //         highlightColor: Colors.grey[100]!,
+                //         child: const CircleAvatar(
+                //           radius: 40,
+                //           backgroundColor: Colors.white,
+                //         ),
+                //       )
+                //     : ProfileImage(
+                //         base64Image: user.employee?.image ?? '',
+                //       ),
                 const SizedBox(height: 8),
                 user == null
                     ? Shimmer.fromColors(

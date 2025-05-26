@@ -12,43 +12,35 @@ Future<bool> processLogin(
     await httpClient.loadBaseUrl();
 
     final response = await httpClient.postMultipart(
-      "/auth/login",
+      "/login",
       loginRequest.toJson(),
     );
 
     final body = jsonDecode(response.body);
 
-    // Tangani jika login gagal berdasarkan isi respons
     if (body is Map && body['status'] == 'failed') {
       final message = body['message'] ?? 'Login gagal.';
-      // Tampilkan pesan error (optional)
       showErrorSnackbar(context, "Terjadi kesalahan: $message");
-
       return false;
     }
 
-    final setCookie = response.headers['set-cookie'];
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    if (setCookie != null) {
-      final sessionIdMatch =
-          RegExp(r'session_id=([^;]+)').firstMatch(setCookie);
-      if (sessionIdMatch != null) {
-        final sessionId = sessionIdMatch.group(1);
-        await prefs.setString("session_id", sessionId!);
-      }
+    final token = body['data']['token'];
+    if (token == null) {
+      showErrorSnackbar(context, "Token tidak ditemukan dalam respons.");
+      return false;
     }
 
-    prefs.setBool("isLoggedIn", true);
-    prefs.setString("db", loginRequest.database);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("token", token);
+    await prefs.setBool("isLoggedIn", true);
 
     return true;
   } catch (error) {
-    // Tangani error jaringan/parsing
     showErrorSnackbar(context, "Terjadi kesalahan: $error");
     return false;
   }
 }
+
 
 Future<bool> processLogout(BuildContext context) async {
   try {

@@ -1,0 +1,7 @@
+POST http://145.223.21.247:6310/api/login
+Content-Type: application/json
+
+{
+    "email": "anggota@example.com",
+    "password": "password"
+}

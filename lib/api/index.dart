@@ -186,16 +186,16 @@ class HttpClient {
 
   Future<Map<String, String>> _getInitHeaders() async {
     final prefs = await SharedPreferences.getInstance();
-    String? sessionId = prefs.getString("session_id");
     String? token = prefs.getString("token");
-    print('session_id=$sessionId');
-    Map<String, String> headers = {};
-    if (sessionId != null) {
-      headers['Cookie'] = 'session_id=$sessionId';
-    }
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+    };
+
     if (token != null) {
       headers['Authorization'] = "Bearer $token";
     }
+
     return headers;
   }
 }

@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'package:distribook/api/impl/logger.dart';
 import 'package:distribook/api/index.dart';
 import 'package:distribook/components/Snackbar.dart';
+import 'package:distribook/responses/get_books_response.dart';
 import 'package:flutter/material.dart';
 import 'package:distribook/responses/get_self_response.dart';
 
 Future<SelfResponse> fetchSelf({required BuildContext context}) async {
   try {
     await httpClient.loadBaseUrl();
-    final response = await httpClient.post("/self", {});
+    final response = await httpClient.get("/user");
     final decoded = jsonDecode(response.body);
 
     SelfResponse selfResponse = SelfResponse.fromJson(decoded);
@@ -24,3 +25,29 @@ Future<SelfResponse> fetchSelf({required BuildContext context}) async {
     rethrow;
   }
 }
+
+
+Future<List<Book>> fetchBook({required BuildContext context}) async {
+  try {
+    await httpClient.loadBaseUrl();
+    final response = await httpClient.get("/books");
+    final decoded = jsonDecode(response.body);
+
+    if (decoded['status'] == 'success') {
+      final List data = decoded['data'];
+      return data.map((item) => Book.fromJson(item)).toList();
+    } else {
+      showErrorSnackbar(context, "Gagal mengambil buku: ${decoded['message']}");
+      return [];
+    }
+  } on HtmlResponseException catch (e, stackTrace) {
+    logError(e.htmlContent, stackTrace, context: 'fetchBook', route: '/books');
+    throw Exception('Received HTML instead of JSON');
+  } catch (error, stackTrace) {
+    logError(error, stackTrace, context: 'fetchBook', route: '/books');
+    showErrorSnackbar(context, "Error fetching books: ${error.toString()}");
+    rethrow;
+  }
+}
+
+
