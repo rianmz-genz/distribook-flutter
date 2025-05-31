@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: Image.asset(
-                    'assets/logo/LogoSpreadhrm.png',
+                    'assets/logo/edistri.png',
                     width: MediaQuery.of(context).size.width * 0.10,
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:distribook/constants/index.dart';
+import 'package:distribook/screens/LoanRequestScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:distribook/screens/HomeScreen.dart';
@@ -21,6 +22,7 @@ class _NavbarState extends State<Navbar> {
   Future<List<Widget>> initMenus() async {
     return <Widget>[
       const HomeScreen(),
+      const LoanRequestScreen(),
       const SettingScreen(),
     ];
   }
@@ -65,10 +67,12 @@ class _NavbarState extends State<Navbar> {
           child: BottomNavigationBar(
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(role == "seller"
-                    ? CupertinoIcons.bag_fill
-                    : CupertinoIcons.home),
-                label: 'Beranda',
+                icon: Icon(CupertinoIcons.book),
+                label: 'Buku',
+              ),
+                BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.bookmark),
+                label: 'Peminjaman',
               ),
                BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.settings),

@@ -37,13 +37,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-        title: const Text('Account'),
-        elevation: 0,
-      ),
+     
       body: Column(
         children: [
           Container(
@@ -62,7 +56,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 //     : ProfileImage(
                 //         base64Image: user.employee?.image ?? '',
                 //       ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 50),
                 user == null
                     ? Shimmer.fromColors(
                         baseColor: Colors.grey[300]!,
@@ -81,51 +75,13 @@ class _SettingScreenState extends State<SettingScreen> {
                           color: Colors.black,
                         ),
                       ),
-                TextButton(
-                  onPressed: () {
-                    navigateTo(context, NextVersionFeatureScreen());
-                  },
-                  child: const Text(
-                    'Change Profile Image',
-                    style: TextStyle(color: Colors.blueAccent),
-                  ),
-                ),
+               
               ],
             ),
           ),
           const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'User Settings',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              navigateTo(context, NextVersionFeatureScreen());
-            },
-            child: ListTile(
-              leading: Container(
-                decoration: BoxDecoration(
-                    color: Colors.blue, borderRadius: BorderRadius.circular(8)),
-                padding: const EdgeInsets.all(8),
-                child: const Icon(Icons.person, color: Colors.white),
-              ),
-              title: const Text(
-                'Data Profil',
-                style: TextStyle(color: Colors.black),
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 16,
-                color: Colors.black,
-              ),
-            ),
-          ),
+         
+         
           const Divider(),
           InkWell(
             onTap: () async {

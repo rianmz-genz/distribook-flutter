@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.text,
     required this.onPressed,
-    this.backgroundColor = const Color(0xff008000),
+    this.backgroundColor = const Color(0xff333333),
     this.textColor = Colors.white
   }) : super(key: key);
 

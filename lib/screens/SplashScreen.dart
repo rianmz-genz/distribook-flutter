@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Transform.scale(
               scale: _scale.value,
               child: Image.asset(
-                'assets/logo/LogoSpreadhrm.png',
+                'assets/logo/edistri.png',
                 width: 220,
                 height: 220,
               ),

@@ -4,7 +4,7 @@ import 'package:distribook/responses/get_books_response.dart';
 import 'package:flutter/material.dart';
 import 'package:distribook/components/CardHomePage.dart';
 import 'package:distribook/components/CustomTextField.dart'; // pastikan import komponen ini
-
+import 'package:distribook/screens/BookDetailScreen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -115,56 +115,62 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           itemCount: filteredBooks.length,
                           itemBuilder: (context, index) {
-                            final book = filteredBooks[index];
-                            return Card(
-                              elevation: 4,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              color: Colors.grey[100],
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AspectRatio(
-                                    aspectRatio: 3 / 4,
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.vertical(
-                                          top: Radius.circular(12)),
-                                      child: Image.network(
-                                        book.coverImage,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (ctx, _, __) =>
-                                            Icon(Icons.error),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              book.title,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            const SizedBox(height: 4),
-                                            
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+  final book = filteredBooks[index];
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BookDetailScreen(book: book),
+        ),
+      );
+    },
+    child: Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      color: Colors.grey[100],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AspectRatio(
+            aspectRatio: 3 / 4,
+            child: ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(12)),
+              child: Image.network(
+                book.coverImage,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (ctx, _, __) => Icon(Icons.error),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      book.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+},
+
                         ),
                       ),
                     ),
