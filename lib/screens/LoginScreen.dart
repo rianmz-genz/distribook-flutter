@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _databaseController.text = prefs.getString('db') ?? 'hrm';
       _urlController.text =
-          prefs.getString('base_url') ?? 'http://145.223.21.247:6310';
+          prefs.getString('base_url') ?? 'http://145.223.21.247:6311';
     });
   }
 
